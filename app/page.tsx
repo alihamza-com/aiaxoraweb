@@ -100,9 +100,6 @@ export default function HomePage() {
         <section aria-label="Performance statistics and client metrics" id="stats">
           <AdvancedStatsSection />
         </section>
-
-        
-
         <Footer />
         <FloatingActions />
         <ChatWidget />

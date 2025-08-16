@@ -1,29 +1,31 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter, Poppins } from "next/font/google"
-import "./globals.css"
-import Navigation from "@/components/navigation"
-import { ThemeProvider } from "@/components/theme-provider"
-import CookieConsent from "@/components/cookie-consent"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter, Poppins } from "next/font/google";
+import "./globals.css";
+import Navigation from "@/components/navigation";
+import { ThemeProvider } from "@/components/theme-provider";
+import CookieConsent from "@/components/cookie-consent";
 import dynamic from "next/dynamic";
+import Toaster from "@/components/ui/toaster";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
-})
+});
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-poppins",
   display: "swap",
-})
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://axorawebsolution.com"),
   title: {
-    default: "Axora Web Solution - Professional Web Development & Digital Services",
+    default:
+      "Axora Web Solution - Professional Web Development & Digital Services",
     template: "%s | Axora Web Solution",
   },
   description:
@@ -53,7 +55,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://axorawebsolution.com",
     siteName: "Axora Web Solution",
-    title: "Professional Web Development & Digital Services | Axora Web Solution",
+    title:
+      "Professional Web Development & Digital Services | Axora Web Solution",
     description:
       "Leading web development company offering custom websites, mobile apps, e-commerce solutions, and digital marketing services worldwide.",
     images: [
@@ -67,7 +70,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Web Development & Digital Services | Axora Web Solution",
+    title:
+      "Professional Web Development & Digital Services | Axora Web Solution",
     description:
       "Leading web development company offering custom websites, mobile apps, e-commerce solutions, and digital marketing services worldwide.",
     images: ["/og-image.jpg"],
@@ -93,13 +97,13 @@ export const metadata: Metadata = {
     canonical: "https://axorawebsolution.com",
   },
   category: "technology",
-    generator: 'v0.dev'
-}
+  generator: "v0.dev",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -110,16 +114,20 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#1e40af" />
         <meta name="msapplication-TileColor" content="#1e40af" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
         Preconnect to external domains
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         {/* DNS prefetch for performance */}
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-
         {/* Structured Data for Organization */}
         <script
           type="application/ld+json"
@@ -130,7 +138,8 @@ export default function RootLayout({
               name: "Axora Web Solution",
               url: "https://axorawebsolution.com",
               logo: "https://axorawebsolution.com/logo.png",
-              description: "Professional web development and digital services company serving international clients",
+              description:
+                "Professional web development and digital services company serving international clients",
               contactPoint: {
                 "@type": "ContactPoint",
                 telephone: "+92-324-523-7429",
@@ -156,13 +165,21 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+      <body
+        className={`${inter.variable} ${poppins.variable} font-sans antialiased`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
           <Navigation />
           {children}
+          <Toaster /> {/* Mount once here */}
           <CookieConsent />
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

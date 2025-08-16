@@ -1,19 +1,30 @@
-"use client"
-import { useState } from "react"
-import type React from "react"
-import { motion } from "framer-motion"
-import { MapPin, Phone, Mail, Send, MessageSquare, Clock, CheckCircle, Star, Loader2, X } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import CustomCursor from "@/components/custom-cursor"
-import FloatingActions from "@/components/floating-actions"
-import ChatWidget from "@/components/chat-widget"
-import Footer from "@/components/footer"
+"use client";
+import { useState } from "react";
+import type React from "react";
+import { motion } from "framer-motion";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Send,
+  MessageSquare,
+  Clock,
+  CheckCircle,
+  Star,
+  Loader2,
+  X,
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import CustomCursor from "@/components/custom-cursor";
+import FloatingActions from "@/components/floating-actions";
+import ChatWidget from "@/components/chat-widget";
+import Footer from "@/components/footer";
 import dynamic from "next/dynamic";
+import { toast } from "@/hooks/use-toast";
 
-import { toast } from "@/hooks/use-toast"
 
 
 export default function ContactPage() {
@@ -25,30 +36,28 @@ export default function ContactPage() {
     project: "",
     message: "",
     budget: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isAutoFilling, setIsAutoFilling] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAutoFilling, setIsAutoFilling] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
-
-
-
-
-
+    }));
+  };
 
   const handleAutoFill = async () => {
-    if (!formData.project.trim()) return
+    if (!formData.project.trim()) return;
 
-    setIsAutoFilling(true)
-
-
-
+    setIsAutoFilling(true);
 
     try {
       const response = await fetch("/api/ai-generate", {
@@ -60,13 +69,13 @@ export default function ContactPage() {
           prompt: `Generate a professional business inquiry message for a project about note only to the point anser wrt not any other thing : ${formData.project}. Include interest in web development services, mention specific needs, and request a consultation. Keep it professional and concise. for best regard use ${formData.name}${formData.email}`,
           type: "content-generation",
         }),
-      })
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to generate content")
+        throw new Error("Failed to generate content");
       }
 
-      const data = await response.json()
+      const data = await response.json();
 
       setFormData((prev) => ({
         ...prev,
@@ -76,9 +85,9 @@ export default function ContactPage() {
         company: "Tech Innovations Inc.",
         message: data.content,
         budget: "$20 - $120",
-      }))
+      }));
     } catch (error) {
-      console.error("AI Generation Error:", error)
+      console.error("AI Generation Error:", error);
       // Fallback content
       setFormData((prev) => ({
         ...prev,
@@ -88,54 +97,55 @@ export default function ContactPage() {
         company: "Tech Innovations Inc.",
         message: `Hi Axora team! I'm interested in discussing a project related to ${formData.project}. We're looking for a professional partner who can help us bring our vision to life with modern web technologies and exceptional design. I'd love to schedule a consultation to explore how we can work together.`,
         budget: "$20 - $120",
-      }))
+      }));
     } finally {
-       
-      setIsAutoFilling(false)
+      setIsAutoFilling(false);
     }
-  }
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus("idle")
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setSubmitStatus("idle");
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
 
-      const data = await response.json()
-
-      if (response.ok) {
-        setSubmitStatus("success")
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          company: "",
-          project: "",
-          message: "",
-          budget: "",
-        })
-      } else {
-        setSubmitStatus("error")
-      }
-    } catch (error) {
-      console.error("Form submission error:", error)
-      setSubmitStatus("error")
-    } finally {
+    if (response.ok) {
       toast({
-      title: "Success",
-      description: "Project sumbit successfully.",
-    })
-      setIsSubmitting(false)
+        title: "✅ Success",
+        description: "Your project was submitted successfully.",
+      });
+      setSubmitStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        project: "",
+        message: "",
+        budget: "",
+      });
+    } else {
+      throw new Error("Submission failed");
     }
+  } catch (error) {
+    console.error("Form submission error:", error);
+    setSubmitStatus("error");
+    toast({
+      title: "❌ Error",
+      description: "Something went wrong. Please try again.",
+      variant: "destructive",
+    });
+  } finally {
+    setIsSubmitting(false);
   }
+};
+
 
   return (
     <>
@@ -149,7 +159,11 @@ export default function ContactPage() {
           </div>
 
           <div className="max-w-6xl mx-auto text-center relative z-10">
-            <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -167,8 +181,8 @@ export default function ContactPage() {
                 </span>
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Let's discuss your vision and create something extraordinary together. Get a free consultation and
-                detailed project proposal.
+                Let's discuss your vision and create something extraordinary
+                together. Get a free consultation and detailed project proposal.
               </p>
 
               {/* Trust Indicators */}
@@ -203,11 +217,14 @@ export default function ContactPage() {
                 className="space-y-8"
               >
                 <div>
-                  <h2 className="text-3xl font-bold text-white mb-6">Get in Touch</h2>
+                  <h2 className="text-3xl font-bold text-white mb-6">
+                    Get in Touch
+                  </h2>
                   <p className="text-gray-300 text-lg leading-relaxed">
-                    Ready to transform your digital presence? We're here to help bring your ideas to life. Whether you
-                    need a complete digital transformation or want to enhance your existing presence, our team is ready
-                    to collaborate.
+                    Ready to transform your digital presence? We're here to help
+                    bring your ideas to life. Whether you need a complete
+                    digital transformation or want to enhance your existing
+                    presence, our team is ready to collaborate.
                   </p>
                 </div>
 
@@ -224,14 +241,18 @@ export default function ContactPage() {
                       <Mail className="w-full h-full text-white" />
                     </div>
                     <div>
-                      <h3 className="text-white font-semibold text-lg">Email Us</h3>
+                      <h3 className="text-white font-semibold text-lg">
+                        Email Us
+                      </h3>
                       <a
                         href="mailto:alihamza@meezansoftwarehouse.com"
                         className="text-blue-300 hover:text-blue-200 transition-colors"
                       >
                         alihamza@meezansoftwarehouse.com
                       </a>
-                      <p className="text-gray-400 text-sm">We'll respond within 24 hours</p>
+                      <p className="text-gray-400 text-sm">
+                        We'll respond within 24 hours
+                      </p>
                     </div>
                   </motion.div>
 
@@ -246,11 +267,18 @@ export default function ContactPage() {
                       <Phone className="w-full h-full text-white" />
                     </div>
                     <div>
-                      <h3 className="text-white font-semibold text-lg">Call Us</h3>
-                      <a href="tel:+923245237429" className="text-purple-300 hover:text-purple-200 transition-colors">
+                      <h3 className="text-white font-semibold text-lg">
+                        Call Us
+                      </h3>
+                      <a
+                        href="tel:+923245237429"
+                        className="text-purple-300 hover:text-purple-200 transition-colors"
+                      >
                         +92 3245237429
                       </a>
-                      <p className="text-gray-400 text-sm">Available 9 AM - 6 PM PKT</p>
+                      <p className="text-gray-400 text-sm">
+                        Available 9 AM - 6 PM PKT
+                      </p>
                     </div>
                   </motion.div>
 
@@ -265,9 +293,13 @@ export default function ContactPage() {
                       <MapPin className="w-full h-full text-white" />
                     </div>
                     <div>
-                      <h3 className="text-white font-semibold text-lg">Visit Us</h3>
+                      <h3 className="text-white font-semibold text-lg">
+                        Visit Us
+                      </h3>
                       <p className="text-green-300">Lahore, Pakistan</p>
-                      <p className="text-gray-400 text-sm">Remote consultations available worldwide</p>
+                      <p className="text-gray-400 text-sm">
+                        Remote consultations available worldwide
+                      </p>
                     </div>
                   </motion.div>
                 </div>
@@ -280,18 +312,27 @@ export default function ContactPage() {
                   viewport={{ once: true }}
                   className="p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-white/10"
                 >
-                  <h3 className="text-white font-semibold mb-4">Quick Connect</h3>
+                  <h3 className="text-white font-semibold mb-4">
+                    Quick Connect
+                  </h3>
                   <div className="flex gap-4">
                     <Button
                       className="bg-green-600 hover:bg-green-700 text-white font-semibold flex-1"
-                      onClick={() => window.open("https://wa.me/923245237429", "_blank")}
+                      onClick={() =>
+                        window.open("https://wa.me/923245237429", "_blank")
+                      }
                     >
                       <MessageSquare className="w-4 h-4 mr-2" />
                       WhatsApp
                     </Button>
                     <Button
                       className="bg-blue-600 hover:bg-blue-700 text-white font-semibold flex-1"
-                      onClick={() => window.open("mailto:alihamza@meezansoftwarehouse.com", "_blank")}
+                      onClick={() =>
+                        window.open(
+                          "mailto:alihamza@meezansoftwarehouse.com",
+                          "_blank"
+                        )
+                      }
                     >
                       <Mail className="w-4 h-4 mr-2" />
                       Email
@@ -337,7 +378,9 @@ export default function ContactPage() {
               >
                 <Card className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl">
                   <CardContent className="p-8">
-                    <h2 className="text-2xl font-bold text-white mb-6">Start Your Project</h2>
+                    <h2 className="text-2xl font-bold text-white mb-6">
+                      Start Your Project
+                    </h2>
 
                     {submitStatus === "success" && (
                       <motion.div
@@ -347,9 +390,13 @@ export default function ContactPage() {
                       >
                         <div className="flex items-center gap-2 text-green-300">
                           <CheckCircle className="w-5 h-5" />
-                          <span className="font-semibold">Message sent successfully!</span>
+                          <span className="font-semibold">
+                            Message sent successfully!
+                          </span>
                         </div>
-                        <p className="text-green-200 text-sm mt-1">We'll get back to you within 24 hours.</p>
+                        <p className="text-green-200 text-sm mt-1">
+                          We'll get back to you within 24 hours.
+                        </p>
                       </motion.div>
                     )}
 
@@ -361,16 +408,22 @@ export default function ContactPage() {
                       >
                         <div className="flex items-center gap-2 text-red-300">
                           <X className="w-5 h-5" />
-                          <span className="font-semibold">Failed to send message</span>
+                          <span className="font-semibold">
+                            Failed to send message
+                          </span>
                         </div>
-                        <p className="text-red-200 text-sm mt-1">Please try again or contact us directly.</p>
+                        <p className="text-red-200 text-sm mt-1">
+                          Please try again or contact us directly.
+                        </p>
                       </motion.div>
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-white/80 text-sm font-medium mb-2">Name *</label>
+                          <label className="block text-white/80 text-sm font-medium mb-2">
+                            Name *
+                          </label>
                           <Input
                             name="name"
                             value={formData.name}
@@ -382,7 +435,9 @@ export default function ContactPage() {
                         </div>
 
                         <div>
-                          <label className="block text-white/80 text-sm font-medium mb-2">Email *</label>
+                          <label className="block text-white/80 text-sm font-medium mb-2">
+                            Email *
+                          </label>
                           <Input
                             name="email"
                             type="email"
@@ -397,7 +452,9 @@ export default function ContactPage() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-white/80 text-sm font-medium mb-2">Phone</label>
+                          <label className="block text-white/80 text-sm font-medium mb-2">
+                            Phone
+                          </label>
                           <Input
                             name="phone"
                             type="tel"
@@ -409,7 +466,9 @@ export default function ContactPage() {
                         </div>
 
                         <div>
-                          <label className="block text-white/80 text-sm font-medium mb-2">Company</label>
+                          <label className="block text-white/80 text-sm font-medium mb-2">
+                            Company
+                          </label>
                           <Input
                             name="company"
                             value={formData.company}
@@ -422,7 +481,9 @@ export default function ContactPage() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-white/80 text-sm font-medium mb-2">Project Type</label>
+                          <label className="block text-white/80 text-sm font-medium mb-2">
+                            Project Type
+                          </label>
                           <select
                             name="project"
                             value={formData.project}
@@ -432,7 +493,10 @@ export default function ContactPage() {
                             <option value="" className="bg-gray-800">
                               Select project type
                             </option>
-                            <option value="Web Development" className="bg-gray-800">
+                            <option
+                              value="Web Development"
+                              className="bg-gray-800"
+                            >
                               Web Development
                             </option>
                             <option value="Mobile App" className="bg-gray-800">
@@ -441,10 +505,16 @@ export default function ContactPage() {
                             <option value="E-commerce" className="bg-gray-800">
                               E-commerce
                             </option>
-                            <option value="AI Integration" className="bg-gray-800">
+                            <option
+                              value="AI Integration"
+                              className="bg-gray-800"
+                            >
                               AI Integration
                             </option>
-                            <option value="Digital Marketing" className="bg-gray-800">
+                            <option
+                              value="Digital Marketing"
+                              className="bg-gray-800"
+                            >
                               Digital Marketing
                             </option>
                             <option value="Other" className="bg-gray-800">
@@ -454,7 +524,9 @@ export default function ContactPage() {
                         </div>
 
                         <div>
-                          <label className="block text-white/80 text-sm font-medium mb-2">Budget Range</label>
+                          <label className="block text-white/80 text-sm font-medium mb-2">
+                            Budget Range
+                          </label>
                           <select
                             name="budget"
                             value={formData.budget}
@@ -464,13 +536,19 @@ export default function ContactPage() {
                             <option value="" className="bg-gray-800">
                               Select budget range
                             </option>
-                            <option value="$1,000 - $20" className="bg-gray-800">
+                            <option
+                              value="$1,000 - $20"
+                              className="bg-gray-800"
+                            >
                               $1,000 - $20
                             </option>
                             <option value="$20 - $120" className="bg-gray-800">
                               $20 - $120
                             </option>
-                            <option value="$120 - $50,000" className="bg-gray-800">
+                            <option
+                              value="$120 - $50,000"
+                              className="bg-gray-800"
+                            >
                               $120 - $50,000
                             </option>
                             <option value="$50,000+" className="bg-gray-800">
@@ -482,7 +560,9 @@ export default function ContactPage() {
 
                       {formData.project && (
                         <div>
-                          <label className="block text-white/80 text-sm font-medium mb-2">AI Auto-Fill Message</label>
+                          <label className="block text-white/80 text-sm font-medium mb-2">
+                            AI Auto-Fill Message
+                          </label>
                           <div className="flex gap-2">
                             <Button
                               type="button"
@@ -501,13 +581,16 @@ export default function ContactPage() {
                             </Button>
                           </div>
                           <p className="text-xs text-white/40 mt-1">
-                            Let AI help you write a professional project description
+                            Let AI help you write a professional project
+                            description
                           </p>
                         </div>
                       )}
 
                       <div>
-                        <label className="block text-white/80 text-sm font-medium mb-2">Project Details *</label>
+                        <label className="block text-white/80 text-sm font-medium mb-2">
+                          Project Details *
+                        </label>
                         <Textarea
                           name="message"
                           value={formData.message}
@@ -538,8 +621,9 @@ export default function ContactPage() {
                       </Button>
 
                       <p className="text-center text-white/60 text-sm">
-                        By submitting this form, you agree to our privacy policy. We'll never share your information
-                        with third parties.
+                        By submitting this form, you agree to our privacy
+                        policy. We'll never share your information with third
+                        parties.
                       </p>
                     </form>
                   </CardContent>
@@ -559,8 +643,12 @@ export default function ContactPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-              <p className="text-gray-300 text-lg">Quick answers to help you get started</p>
+              <h2 className="text-4xl font-bold text-white mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-gray-300 text-lg">
+                Quick answers to help you get started
+              </p>
             </motion.div>
 
             <div className="space-y-6">
@@ -605,8 +693,12 @@ export default function ContactPage() {
                 >
                   <Card className="bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-bold text-white mb-3">{faq.question}</h3>
-                      <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                      <h3 className="text-xl font-bold text-white mb-3">
+                        {faq.question}
+                      </h3>
+                      <p className="text-gray-300 leading-relaxed">
+                        {faq.answer}
+                      </p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -620,5 +712,5 @@ export default function ContactPage() {
         <ChatWidget />
       </main>
     </>
-  )
+  );
 }
