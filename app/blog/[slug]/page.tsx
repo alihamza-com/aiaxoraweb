@@ -14,7 +14,7 @@ const blogPost = {
   title: "The Future of AI in Web Design: Beyond Templates and Themes",
   excerpt:
     "Exploring how artificial intelligence is revolutionizing web design, from automated layouts to personalized user experiences that adapt in real-time.",
-  coverImage: "/placeholder.svg?height=600&width=1200&text=AI+Web+Design+Future",
+  coverImage: "/aiArticle.png",
   author: "Alex Rivera",
   publishDate: "2024-12-15",
   readTime: "8 min read",
@@ -92,22 +92,22 @@ const relatedPosts = [
   {
     title: "Mastering Cinematic Scrolling: Creating Story-Driven Web Experiences",
     slug: "cinematic-scrolling-techniques",
-    image: "/placeholder.svg?height=200&width=300&text=Cinematic+Scrolling",
+    image: "/aiArticle.png",
   },
   {
     title: "Glassmorphism in 2024: Implementation Guide and Best Practices",
     slug: "glassmorphism-design-trend",
-    image: "/placeholder.svg?height=200&width=300&text=Glassmorphism+Guide",
+    image: "/aiArticle.png",
   },
   {
     title: "AI-Powered Content Strategy: Scaling Creativity with Intelligence",
     slug: "ai-powered-content-strategy",
-    image: "/placeholder.svg?height=200&width=300&text=AI+Content+Strategy",
-  },
+      image: "/aiArticle.png",
+    },
 ]
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const shareUrl = `https://axora.dev/blog/${params.slug}`
+  const shareUrl = `https://aiaxoraweb.vercel.app/blog/${params.slug}`
 
   return (
     <>
@@ -154,7 +154,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               className="rounded-2xl overflow-hidden border border-white/10"
             >
               <Image
-                src={blogPost.coverImage || "/placeholder.svg"}
+                src={blogPost.coverImage }
                 alt={blogPost.title}
                 width={1200}
                 height={600}

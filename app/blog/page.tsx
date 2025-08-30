@@ -17,7 +17,7 @@ const blogPosts = [
     title: "The Future of AI in Web Design: Beyond Templates and Themes",
     excerpt:
       "Exploring how artificial intelligence is revolutionizing web design, from automated layouts to personalized user experiences that adapt in real-time.",
-    coverImage: "/placeholder.svg?height=400&width=600&text=AI+Web+Design+Future",
+    coverImage: "/aiArticle.png",
     author: "Alex Rivera",
     publishDate: "2024-12-15",
     readTime: "8 min read",
@@ -30,7 +30,7 @@ const blogPosts = [
     title: "Mastering Cinematic Scrolling: Creating Story-Driven Web Experiences",
     excerpt:
       "Learn advanced techniques for implementing scroll-triggered animations that tell compelling stories and keep users engaged throughout their journey.",
-    coverImage: "/placeholder.svg?height=400&width=600&text=Cinematic+Scrolling",
+    coverImage: "/aiArticle.png",
     author: "Rhea Santos",
     publishDate: "2024-12-10",
     readTime: "12 min read",
@@ -43,7 +43,7 @@ const blogPosts = [
     title: "Glassmorphism in 2024: Implementation Guide and Best Practices",
     excerpt:
       "A comprehensive guide to implementing glassmorphism effects in modern web applications, including performance considerations and accessibility.",
-    coverImage: "/placeholder.svg?height=400&width=600&text=Glassmorphism+Guide",
+    coverImage: "/aiArticle.png",
     author: "Zara Chen",
     publishDate: "2024-12-05",
     readTime: "10 min read",
@@ -56,7 +56,7 @@ const blogPosts = [
     title: "AI-Powered Content Strategy: Scaling Creativity with Intelligence",
     excerpt:
       "How to leverage AI tools for content creation while maintaining brand voice and human creativity in your digital marketing strategy.",
-    coverImage: "/placeholder.svg?height=400&width=600&text=AI+Content+Strategy",
+    coverImage: "/aiArticle.png",
     author: "Orion Blake",
     publishDate: "2024-11-28",
     readTime: "15 min read",
@@ -69,7 +69,7 @@ const blogPosts = [
     title: "Next.js Performance Optimization: From Good to Lightning Fast",
     excerpt:
       "Advanced techniques for optimizing Next.js applications, including image optimization, code splitting, and server-side rendering strategies.",
-    coverImage: "/placeholder.svg?height=400&width=600&text=NextJS+Performance",
+    coverImage: "/aiArticle.png",
     author: "Alex Rivera",
     publishDate: "2024-11-20",
     readTime: "18 min read",
@@ -82,7 +82,7 @@ const blogPosts = [
     title: "Building Brand Identity in the Digital Age: A Complete Guide",
     excerpt:
       "Essential strategies for creating cohesive brand identities that work across all digital touchpoints, from websites to social media.",
-    coverImage: "/placeholder.svg?height=400&width=600&text=Brand+Identity+Digital",
+    coverImage: "/aiArticle.png",
     author: "Zara Chen",
     publishDate: "2024-11-15",
     readTime: "14 min read",
@@ -137,7 +137,7 @@ export default function BlogPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                       <div className="relative overflow-hidden">
                         <Image
-                          src={featuredPost.coverImage || "/placeholder.svg"}
+                          src={featuredPost.coverImage}
                           alt={featuredPost.title}
                           width={600}
                           height={400}
@@ -229,7 +229,7 @@ export default function BlogPage() {
                     <CardContent className="p-0">
                       <div className="relative overflow-hidden">
                         <Image
-                          src={post.coverImage || "/placeholder.svg"}
+                          src={post.coverImage }
                           alt={post.title}
                           width={600}
                           height={400}

@@ -58,7 +58,7 @@ export default function Navigation() {
               <img src="/logo.png"/>
             </div>
             <div>
-              <span className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+              <span className="text-2xl font-bold text-blue-600 group-hover:text-blue-600 transition-colors">
                 Axora
               </span>
               <div className="text-xs text-blue-600 font-medium -mt-1 flex items-center gap-1">
