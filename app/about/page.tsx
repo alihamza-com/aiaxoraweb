@@ -1,6 +1,7 @@
-// app/mobile-apps/page.tsx
+// app/mobile-apps/page.tsx  (should ideally be /about/page.tsx)
 import type { Metadata } from "next";
 import AboutPage from "./aboutClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "About Us | AxoraWeb - Innovating Web, Mobile & AI Solutions",
@@ -47,12 +48,30 @@ export const metadata: Metadata = {
   },
 };
 
-
-
-
-
-export default function WebsiteDesignPage() {
+export default function AboutPageWrapper() {
   return (
-    <  AboutPage/>
+    <>
+      {/* JSON-LD Structured Data for Organization / About Page */}
+      <Script
+        id="ld-about"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "AxoraWeb",
+            url: "https://aiaxoraweb.vercel.app/about",
+            logo: "https://aiaxoraweb.vercel.app/logo.png",
+            description:
+              "AxoraWeb is a full-stack development company providing web, mobile, ecommerce, and AI solutions. Our mission is to help businesses grow with technology-driven digital products.",
+            sameAs: [
+              "https://www.linkedin.com/company/axoraweb",
+              "https://twitter.com/axoraweb"
+            ]
+          }),
+        }}
+      />
+      <AboutPage />
+    </>
   );
 }

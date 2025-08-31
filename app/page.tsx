@@ -17,51 +17,41 @@ import dynamic from "next/dynamic";
 // SEO-optimized structured data for homepage
 const homePageJsonLd = {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  name: "Professional Web Development Services | Axora Web Solution",
-  description:
-    "Leading web development company in Pakistan offering custom websites, mobile apps, e-commerce solutions, and digital marketing services. Serving international clients with cutting-edge technology.",
-  url: "https://axorawebsolution.com",
-  mainEntity: {
+  "@type": "WebSite",
+  "url": "https://axorawebsolution.com",
+  "name": "Axora Web Solution",
+  "description": "Leading web development company in Pakistan offering custom websites, mobile apps, e-commerce solutions, and digital marketing services.",
+  "publisher": {
     "@type": "Organization",
-    name: "Axora Web Solution",
-    description: "Professional web development and digital services company serving international clients",
-    url: "https://axorawebsolution.com",
-    logo: "https://axorawebsolution.com/logo.png",
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+92-324-523-7429",
-      contactType: "customer service",
-      availableLanguage: ["English", "Urdu"],
+    "name": "Axora Web Solution",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://axorawebsolution.com/logo.png"
     },
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "PK",
-      addressRegion: "Punjab",
-      addressLocality: "Lahore",
-    },
-    sameAs: [
+    "sameAs": [
       "https://www.facebook.com/axorawebsolution",
       "https://www.linkedin.com/company/axorawebsolution",
-      "https://twitter.com/axorawebsolution",
-    ],
+      "https://twitter.com/axorawebsolution"
+    ]
   },
-  breadcrumb: {
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://axorawebsolution.com/search?query={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "breadcrumb": {
     "@type": "BreadcrumbList",
-    itemListElement: [
+    "itemListElement": [
       {
         "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://axorawebsolution.com",
-      },
-    ],
-  },
-  speakable: {
-    "@type": "SpeakableSpecification",
-    cssSelector: ["h1", "h2", ".hero-description"],
-  },
+        "position": 1,
+        "name": "Home",
+        "item": "https://axorawebsolution.com"
+      }
+    ]
+  }
 }
+
 
 export default function HomePage() {
   useEffect(() => {

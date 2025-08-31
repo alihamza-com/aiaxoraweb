@@ -1,6 +1,8 @@
-// app/mobile-apps/page.tsx
+// app/mobile-apps/page.tsx  (ideally /services/ecommerce/page.tsx)
 import type { Metadata } from "next";
 import EcommercePage from "./ecommerceClient";
+import Script from "next/script";
+
 export const metadata: Metadata = {
   title: "Ecommerce Development Services | AxoraWeb",
   description:
@@ -47,9 +49,31 @@ export const metadata: Metadata = {
   },
 };
 
-
-export default function WebsiteDesignPage() {
+export default function EcommerceWrapper() {
   return (
-   <EcommercePage />
+    <>
+      {/* JSON-LD Structured Data for Ecommerce Development Service */}
+      <Script
+        id="ld-ecommerce"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "AxoraWeb",
+            url: "https://aiaxoraweb.vercel.app/services/ecommerce",
+            logo: "https://aiaxoraweb.vercel.app/logo.png",
+            description:
+              "AxoraWeb provides professional ecommerce development services, including Shopify, WooCommerce, Magento, and custom online store solutions.",
+            areaServed: "Worldwide",
+            sameAs: [
+              "https://www.linkedin.com/aiaxoraweb",
+              "https://twitter.com/axoraweb"
+            ],
+          }),
+        }}
+      />
+      <EcommercePage />
+    </>
   );
 }

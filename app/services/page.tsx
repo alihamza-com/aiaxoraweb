@@ -1,7 +1,7 @@
-// app/mobile-apps/page.tsx
+// app/mobile-apps/page.tsx (ideally /services/page.tsx)
 import type { Metadata } from "next";
 import ServicesPage from "./ServicesClient";
-
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Our Services | Web, Mobile & Ecommerce Development | AxoraWeb",
@@ -48,11 +48,31 @@ export const metadata: Metadata = {
   },
 };
 
-
-
-
-export default function WebsiteDesignPage() {
+export default function ServicesPageWrapper() {
   return (
-    <ServicesPage  />
+    <>
+      {/* JSON-LD Structured Data for Services */}
+      <Script
+        id="ld-services"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "AxoraWeb",
+            url: "https://aiaxoraweb.vercel.app/services",
+            logo: "https://aiaxoraweb.vercel.app/logo.png",
+            description:
+              "AxoraWeb provides professional web development, mobile app solutions, ecommerce platforms, AI integrations, and custom software development services.",
+            areaServed: "Worldwide",
+            sameAs: [
+              "https://www.linkedin.com/aiaxoraweb",
+              "https://twitter.com/axoraweb"
+            ],
+          }),
+        }}
+      />
+      <ServicesPage />
+    </>
   );
 }

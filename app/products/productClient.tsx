@@ -1,21 +1,26 @@
-"use client"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { ExternalLink, Play } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import CustomCursor from "@/components/custom-cursor"
-import FloatingActions from "@/components/floating-actions"
-import ChatWidget from "@/components/chat-widget"
-
+"use client";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { ExternalLink, Play } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import CustomCursor from "@/components/custom-cursor";
+import FloatingActions from "@/components/floating-actions";
+import ChatWidget from "@/components/chat-widget";
+import Footer from "@/components/footer";
 const products = [
   {
     id: 1,
     title: "ERP  Software",
     description:
       "Drop-in conversational widgets with custom personalities and advanced AI capabilities. Perfect for customer support, lead generation, and user engagement.",
-    features: ["Custom AI Personalities", "Multi-language Support", "Analytics Dashboard", "Easy Integration"],
+    features: [
+      "Custom AI Personalities",
+      "Multi-language Support",
+      "Analytics Dashboard",
+      "Easy Integration",
+    ],
     preview: "/erp2.png",
     demoUrl: "/https://axorawebschool.vercel.app/",
     category: "AI Solutions",
@@ -26,7 +31,12 @@ const products = [
     title: "School Managment Software",
     description:
       "Complete Next.js application templates with authentication, database integration, and modern UI components. Get your project started in minutes.",
-    features: ["Next.js 14 + TypeScript", "Authentication Ready", "Database Integration", "Modern UI Components"],
+    features: [
+      "Next.js 14 + TypeScript",
+      "Authentication Ready",
+      "Database Integration",
+      "Modern UI Components",
+    ],
     preview: "/smartschool360.png",
     demoUrl: "#",
     category: "Development Tools",
@@ -37,7 +47,12 @@ const products = [
     title: "Custom Website Templete",
     description:
       "Pre-built workflow automations for content operations, lead management, and business processes. Save hours of manual work every week.",
-    features: ["Workflow Automation", "API Integrations", "Custom Triggers", "Analytics & Reporting"],
+    features: [
+      "Workflow Automation",
+      "API Integrations",
+      "Custom Triggers",
+      "Analytics & Reporting",
+    ],
     preview: "/digital.png",
     demoUrl: "#",
     category: "Business Tools",
@@ -48,13 +63,18 @@ const products = [
     title: "Digital markting ",
     description:
       "Complete brand identity packages with logos, color palettes, typography, and brand guidelines. Everything you need to establish a strong brand presence.",
-    features: ["Logo Variations", "Color Palettes", "Typography System", "Brand Guidelines"],
+    features: [
+      "Logo Variations",
+      "Color Palettes",
+      "Typography System",
+      "Brand Guidelines",
+    ],
     preview: "/digitalmarkitingportfolio.png",
     demoUrl: "#",
     category: "Design Assets",
     gradient: "from-orange-500 to-red-600",
   },
-]
+];
 
 export default function ProductsPage() {
   return (
@@ -64,7 +84,11 @@ export default function ProductsPage() {
         {/* Hero Section */}
         <section className="py-24 px-6 relative overflow-hidden">
           <div className="max-w-6xl mx-auto text-center">
-            <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
                 Our{" "}
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
@@ -72,8 +96,8 @@ export default function ProductsPage() {
                 </span>
               </h1>
               <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-                Ready-to-use solutions and templates that accelerate your development process and enhance your digital
-                presence.
+                Ready-to-use solutions and templates that accelerate your
+                development process and enhance your digital presence.
               </p>
             </motion.div>
           </div>
@@ -130,17 +154,28 @@ export default function ProductsPage() {
 
                       {/* Product Info */}
                       <div className="p-8">
-                        <h3 className="text-2xl font-bold text-white mb-4">{product.title}</h3>
-                        <p className="text-white/70 leading-relaxed mb-6">{product.description}</p>
+                        <h3 className="text-2xl font-bold text-white mb-4">
+                          {product.title}
+                        </h3>
+                        <p className="text-white/70 leading-relaxed mb-6">
+                          {product.description}
+                        </p>
 
                         {/* Features */}
                         <div className="mb-6">
-                          <h4 className="text-lg font-semibold text-white mb-3">Key Features</h4>
+                          <h4 className="text-lg font-semibold text-white mb-3">
+                            Key Features
+                          </h4>
                           <div className="grid grid-cols-2 gap-2">
                             {product.features.map((feature, featureIndex) => (
-                              <div key={featureIndex} className="flex items-center gap-2">
+                              <div
+                                key={featureIndex}
+                                className="flex items-center gap-2"
+                              >
                                 <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-600" />
-                                <span className="text-white/80 text-sm">{feature}</span>
+                                <span className="text-white/80 text-sm">
+                                  {feature}
+                                </span>
                               </div>
                             ))}
                           </div>
@@ -184,25 +219,32 @@ export default function ProductsPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-white mb-4">Why Choose Our Products?</h2>
-              <p className="text-white/70 text-lg">Built with the same attention to detail as our custom projects</p>
+              <h2 className="text-4xl font-bold text-white mb-4">
+                Why Choose Our Products?
+              </h2>
+              <p className="text-white/70 text-lg">
+                Built with the same attention to detail as our custom projects
+              </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
                   title: "Production Ready",
-                  description: "All products are thoroughly tested and optimized for production environments.",
+                  description:
+                    "All products are thoroughly tested and optimized for production environments.",
                   gradient: "from-cyan-500 to-blue-600",
                 },
                 {
                   title: "Easy Integration",
-                  description: "Simple setup process with comprehensive documentation and support.",
+                  description:
+                    "Simple setup process with comprehensive documentation and support.",
                   gradient: "from-purple-500 to-pink-600",
                 },
                 {
                   title: "Regular Updates",
-                  description: "Continuous improvements and new features based on user feedback.",
+                  description:
+                    "Continuous improvements and new features based on user feedback.",
                   gradient: "from-green-500 to-emerald-600",
                 },
               ].map((feature, index) => (
@@ -216,10 +258,14 @@ export default function ProductsPage() {
                 >
                   <Card className="h-full bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 transition-all duration-300 group">
                     <CardContent className="p-8 text-center">
-                      <div className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${feature.gradient} p-4`}>
+                      <div
+                        className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${feature.gradient} p-4`}
+                      >
                         <div className="w-full h-full bg-white/20 rounded-lg" />
                       </div>
-                      <h3 className="text-xl font-bold text-white mb-4">{feature.title}</h3>
+                      <h3 className="text-xl font-bold text-white mb-4">
+                        {feature.title}
+                      </h3>
                       <p className="text-white/70">{feature.description}</p>
                     </CardContent>
                   </Card>
@@ -238,9 +284,12 @@ export default function ProductsPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-white mb-6">Ready to Accelerate Your Project?</h2>
+              <h2 className="text-4xl font-bold text-white mb-6">
+                Ready to Accelerate Your Project?
+              </h2>
               <p className="text-xl text-white/70 mb-8">
-                Get access to our premium products and start building faster than ever before.
+                Get access to our premium products and start building faster
+                than ever before.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
@@ -263,9 +312,10 @@ export default function ProductsPage() {
           </div>
         </section>
 
+        <Footer />
         <FloatingActions />
         <ChatWidget />
       </main>
     </>
-  )
+  );
 }

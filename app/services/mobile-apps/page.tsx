@@ -1,6 +1,8 @@
 // app/mobile-apps/page.tsx
 import type { Metadata } from "next";
 import MobileAppClient from "./mobileapp-client";
+import Script from "next/script";
+
 export const metadata: Metadata = {
   title: "Mobile App Development Services | AxoraWeb",
   description:
@@ -46,9 +48,30 @@ export const metadata: Metadata = {
   },
 };
 
-
-export default function WebsiteDesignPage() {
+export default function MobileAppsPageWrapper() {
   return (
-   <MobileAppClient />
+    <>
+      {/* JSON-LD Structured Data for Mobile App Development Service */}
+      <Script
+        id="ld-mobile-service"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "AxoraWeb",
+            url: "https://aiaxoraweb.vercel.app/mobile-apps",
+            logo: "https://aiaxoraweb.vercel.app/logo.png",
+            description:
+              "AxoraWeb provides professional mobile app development services for iOS and Android, including cross-platform solutions.",
+            sameAs: [
+              "https://www.linkedin.com/company/axoraweb",
+              "https://twitter.com/axoraweb"
+            ]
+          }),
+        }}
+      />
+      <MobileAppClient />
+    </>
   );
 }

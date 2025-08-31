@@ -1,6 +1,8 @@
-// app/mobile-apps/page.tsx
+// app/ai-integration/page.tsx
 import type { Metadata } from "next";
 import AIIntegrationsPage from "./aiintegrations-client";
+import Script from "next/script";
+
 export const metadata: Metadata = {
   title: "AI Integration Services | AxoraWeb - AI-Powered Solutions",
   description:
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "AxoraWeb",
     images: [
       {
-        url: "https://aiaxoraweb.vercel.app/ai.jpg", // create a banner for this page
+        url: "https://aiaxoraweb.vercel.app/ai.jpg",
         width: 1200,
         height: 630,
         alt: "AI Integration Services by AxoraWeb",
@@ -46,9 +48,31 @@ export const metadata: Metadata = {
   },
 };
 
-
-export default function WebsiteDesignPage() {
+export default function AIIntegrationWrapper() {
   return (
-   <AIIntegrationsPage />
+    <>
+      {/* JSON-LD Structured Data for AI Integration Services */}
+      <Script
+        id="ld-ai-integration"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "AxoraWeb",
+            url: "https://aiaxoraweb.vercel.app/ai-integration",
+            logo: "https://aiaxoraweb.vercel.app/logo.png",
+            description:
+              "AxoraWeb provides AI integration services for websites, web apps, and business processes. We deliver AI-powered automation, machine learning solutions, and smart applications.",
+            areaServed: "Worldwide",
+            sameAs: [
+              "https://www.linkedin.com/aiaxoraweb",
+              "https://twitter.com/axoraweb"
+            ],
+          }),
+        }}
+      />
+      <AIIntegrationsPage />
+    </>
   );
 }

@@ -1,6 +1,7 @@
-// app/mobile-apps/page.tsx
+// app/mobile-apps/page.tsx  (should ideally be /contact/page.tsx)
 import type { Metadata } from "next";
 import ContactPage from "./contactClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Contact Us | AxoraWeb - Web, Mobile & Ecommerce Experts",
@@ -47,13 +48,38 @@ export const metadata: Metadata = {
   },
 };
 
-
-
-
-
-
-export default function WebsiteDesignPage() {
+export default function ContactPageWrapper() {
   return (
-    <  ContactPage/>
+    <>
+      {/* JSON-LD Structured Data for Contact / Organization */}
+      <Script
+        id="ld-contact"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "AxoraWeb",
+            url: "https://aiaxoraweb.vercel.app/contact",
+            logo: "https://aiaxoraweb.vercel.app/logo.png",
+            description:
+              "AxoraWeb is a professional web, mobile, ecommerce, and AI development company. Contact us to discuss your project and get a custom solution.",
+            contactPoint: [
+              {
+                "@type": "ContactPoint",
+                telephone: "+1-234-567-890",
+                contactType: "customer service",
+                areaServed: "Worldwide",
+              },
+            ],
+            sameAs: [
+              "https://www.linkedin.com/in/aiaxoraweb",
+              "https://twitter.com/axoraweb",
+            ],
+          }),
+        }}
+      />
+      <ContactPage />
+    </>
   );
 }

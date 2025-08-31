@@ -1,6 +1,7 @@
-// app/mobile-apps/page.tsx
+// app/products/page.tsx
 import type { Metadata } from "next";
 import ProductsPage from "./productClient";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Our Products | Innovative SaaS & Digital Solutions | AxoraWeb",
@@ -47,11 +48,35 @@ export const metadata: Metadata = {
   },
 };
 
-
-
-
-export default function WebsiteDesignPage() {
+export default function ProductsWrapper() {
   return (
-    <ProductsPage  />
+    <>
+      {/* JSON-LD Structured Data for Products */}
+      <Script
+        id="ld-products"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "AxoraWeb Products",
+            url: "https://aiaxoraweb.vercel.app/products",
+            image: "https://aiaxoraweb.vercel.app/mobile.jpg",
+            description:
+              "AxoraWeb offers innovative SaaS platforms, AI-powered tools, and digital solutions designed to boost business efficiency and growth.",
+            brand: {
+              "@type": "Organization",
+              name: "AxoraWeb",
+              logo: "https://aiaxoraweb.vercel.app/logo.png",
+              sameAs: [
+                "https://www.linkedin.com/aiaxoraweb",
+                "https://twitter.com/axoraweb"
+              ]
+            }
+          }),
+        }}
+      />
+      <ProductsPage />
+    </>
   );
 }
