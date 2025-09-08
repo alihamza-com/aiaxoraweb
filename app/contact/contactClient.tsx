@@ -245,10 +245,10 @@ export default function ContactPage() {
                         Email Us
                       </h3>
                       <a
-                        href="mailto:alihamza@meezansoftwarehouse.com"
+                        href="mailto:axoraweb.services@gmail.com"
                         className="text-blue-300 hover:text-blue-200 transition-colors"
                       >
-                        alihamza@meezansoftwarehouse.com
+                        axoraweb.services@gmail.com
                       </a>
                       <p className="text-gray-400 text-sm">
                         We'll respond within 24 hours
@@ -329,7 +329,7 @@ export default function ContactPage() {
                       className="bg-blue-600 hover:bg-blue-700 text-white font-semibold flex-1"
                       onClick={() =>
                         window.open(
-                          "mailto:alihamza@meezansoftwarehouse.com",
+                          "mailto:axoraweb.services@gmail.com",
                           "_blank"
                         )
                       }

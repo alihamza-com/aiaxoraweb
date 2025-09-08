@@ -412,8 +412,8 @@ export default function Footer() {
                   <Mail className="w-5 h-5 text-blue-400" />
                 </div>
                 <div>
-                  <a href="mailto:alihamza@meezansoftwarehouse.com" className="font-medium">
-                    alihamza@meezansoftwarehouse.com
+                  <a href="mailto:axoraweb.services@gmail.com" className="font-medium">
+                    axoraweb.services@gmail.com
                   </a>
                   <div className="text-xs text-gray-400">24h response time</div>
                 </div>

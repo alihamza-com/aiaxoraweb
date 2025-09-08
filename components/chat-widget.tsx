@@ -53,7 +53,7 @@ export default function ChatWidget() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          prompt: `You are a professional consultant for Axora Web Solution. The user asked: "${textToSend}". Provide a helpful, professional response about our web development, AI integration, and digital services. Keep it concise and actionable. If they're interested in services, guide them to contact us at alihamza@meezansoftwarehouse.com or +92 3245237429.`,
+          prompt: `You are a professional consultant for Axora Web Solution. The user asked: "${textToSend}". Provide a helpful, professional response about our web development, AI integration, and digital services. Keep it concise and actionable. If they're interested in services, guide them to contact us at axoraweb.services@gmail.com or +92 3245237429.`,
           type: "chatbot",
         }),
       })
@@ -77,7 +77,7 @@ export default function ChatWidget() {
         type: "bot",
         content: `I'd be happy to help! For immediate assistance, please contact us directly:
         
-📧 Email: alihamza@meezansoftwarehouse.com
+📧 Email: axoraweb.services@gmail.com
 📱 Phone: +92 3245237429
 
 We specialize in:
@@ -290,7 +290,7 @@ Let's discuss your project!`,
                       </div>
                       <div className="flex items-center gap-1">
                         <Mail className="w-3 h-3" />
-                        <span>alihamza@meezansoftwarehouse.com</span>
+                        <span>axoraweb.services@gmail.com</span>
                       </div>
                     </div>
                   </div>

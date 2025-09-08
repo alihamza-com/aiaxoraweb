@@ -131,7 +131,7 @@ export default function Navigation() {
                 <span>+92 324 523 7429</span>
               </a>
               <a
-                href="mailto:alihamza@meezansoftwarehouse.com"
+                href="mailto:axoraweb.services@gmail.com"
                 className={`flex items-center gap-1 transition-colors ${
                   scrolled ? "text-gray-600 hover:text-blue-600" : "text-gray-300 hover:text-blue-300"
                 }`}
@@ -249,11 +249,11 @@ export default function Navigation() {
                   <span>+92 324 523 7429</span>
                 </a>
                 <a
-                  href="mailto:alihamza@meezansoftwarehouse.com"
+                  href="mailto:axoraweb.services@gmail.com"
                   className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors"
                 >
                   <Mail className="w-4 h-4" />
-                  <span>alihamza@meezansoftwarehouse.com</span>
+                  <span>axoraweb.services@gmail.com</span>
                 </a>
                 <Button
                   className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 rounded-full"
